@@ -24,10 +24,10 @@ Getting Started
 1. Copy all the source files from the 'src' directory of this package to your cocos2d or kobold2d project.
 2. Copy all the images from the 'images' directory to the 'Resources' directory of your project.
 3. In the `init` method of the layer , to which you want to add the pause button , add the following code:
-   ```objc
-        PauseButton*  pauseBtn = [PauseButton  node];
-        [self  addChild:pauseBtn];
-   ```
+```objc
+PauseButton*  pauseBtn = [PauseButton  node];
+[self  addChild:pauseBtn];
+```
 **Note**: `PauseButton` class will pause the layer to which it is added and all its children and sub-children and so on.
 So you should add it to the main layer of your scene.
 
