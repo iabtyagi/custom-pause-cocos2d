@@ -20,6 +20,7 @@ Getting Started
 1. Copy all the source files from the 'src' directory of this package to your cocos2d or kobold2d project.
 2. Copy all the images from the 'images' directory to the 'Resources' directory of your project.
 3. In the `init` method of the layer , to which you want to add the pause button , add the following code:
+
 ```objc
 PauseButton*  pauseBtn = [PauseButton  node];
 [self  addChild:pauseBtn];
@@ -35,8 +36,8 @@ If you change the images, don't forget to change the names accordingly in the `i
 
 **Note**: The layout of buttons, in the package as it is, is for landscape mode (Although it will work perfectly fine in any mode as it is , only the layout will be less appealing).
 
-Home button press or Incoming Call
-----------------------------------
+Home button press or Incoming Call (OPTIONAL)
+---------------------------------------------
 Game can also be paused when the user presses Home button or an incoming call arrives.
 You just have to call the pause method of `pauseBtn` object.
 
@@ -47,7 +48,6 @@ Eg.  In your `AppDelegate` override `applicationWillResignActive` and `applicati
     //Pause only if GameLayer in running.
     CCScene * scene = [[CCDirector  sharedDirector] runningScene];
     id layer = [scene getChildByTag:TAG_MY_GAME];  //set this tag in your GameLayer init method
-    
     if (layer)
     {
         // Game is running...pause it
@@ -57,7 +57,6 @@ Eg.  In your `AppDelegate` override `applicationWillResignActive` and `applicati
     {
         //Some other scene is running...do nothing
     }
-    
     [[CCDirector  sharedDirector] pause];
 }
 
