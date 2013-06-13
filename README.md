@@ -3,16 +3,12 @@ PauseButton and PauseLayer
 The `PauseButton` class along with the `PauseLayer` class can be used to add pause/resume functionality in your cocos2d or kobold2d games.
 
 Key features:
-
    * Custom pause code instead of CCDirector pause.
-
    * Slider In/Out on pause/resume.
-
    * Transparent hue over game when paused.
 
 Introduction
 -----------
-
 Generally the recommended pause solution for cocos2d games , i.e. CCDirector pause/resume api is only useful for demo purposes. It pauses everything in the game , so running actions and animations while the game is paused is not possible (which is often required in real games).
 
 PauseButton class does not use CCDirector pause. Rather, it implements its own custom pause functionality. It pauses everything for its parent node and all its children and their children and so on , but the PauseLayer is not paused. This can be used to run any actions or animations even when the game is paused.
@@ -28,6 +24,7 @@ Getting Started
 PauseButton*  pauseBtn = [PauseButton  node];
 [self  addChild:pauseBtn];
 ```
+
 **Note**: `PauseButton` class will pause the layer to which it is added and all its children and sub-children and so on.
 So you should add it to the main layer of your scene.
 
@@ -38,3 +35,43 @@ If you change the images, don't forget to change the names accordingly in the `i
 
 **Note**: The layout of buttons, in the package as it is, is for landscape mode (Although it will work perfectly fine in any mode as it is , only the layout will be less appealing).
 
+Home button press or Incoming Call
+----------------------------------
+Game can also be paused when the user presses Home button or an incoming call arrives.
+You just have to call the pause method of `pauseBtn` object.
+
+Eg.  In your `AppDelegate` override `applicationWillResignActive` and `applicationDidBecomeActive` methods as follows:
+```objc
+-(void)applicationWillResignActive:(UIApplication *)application
+{
+    //Pause only if GameLayer in running.
+    CCScene * scene = [[CCDirector  sharedDirector] runningScene];
+    id layer = [scene getChildByTag:TAG_MY_GAME];  //set this tag in your GameLayer init method
+    
+    if (layer)
+    {
+        // Game is running...pause it
+        [layer myAppResignActive];
+    }
+    else
+    {
+        //Some other scene is running...do nothing
+    }
+    
+    [[CCDirector  sharedDirector] pause];
+}
+
+-(void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [[CCDirector  sharedDirector] resume];
+}
+```
+And in your GameLayer add this method:
+```objc
+-(void)myAppResignActive
+{
+    [pauseBtn  pauseButtonTouched:self];
+}
+```
+
+And now your game will be paused when Home button is pressed or on incoming call in the same way as it pauses on pause button press.
