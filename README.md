@@ -30,7 +30,7 @@ PauseButton*  pauseBtn = [PauseButton  node];
 So you should add it to the main layer of your scene.
 
 And thats it, with these three simple steps you will have a pause button in your game , fully functional and with effects like transparent hue and a slider.
-
+The `PauseLayer` class is not puased and it can be used to run actions or animations if required.
 The images used for pause button , slider and resume button can be changed easily to suit your needs.
 If you change the images, don't forget to change the names accordingly in the `init` method in the `PauseButton.m` file.
 
