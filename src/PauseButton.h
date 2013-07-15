@@ -19,3 +19,7 @@
 -(void)pauseButtonTouched:(id)sender;
 
 @end
+
+@interface CCNode (IABPauseButton)
+-(void) setPosRelativeToParentPos:(CGPoint)pos;
+@end

@@ -35,7 +35,7 @@
         CCMenu* resMenu = [CCMenu menuWithItems:resumeBtn, nil];
         
         [resumeSlider addChild:resMenu];
-        [resMenu setPositionRelativeToParentPosition:ccp(-70.0f,65.0f)];
+        [resMenu setPosRelativeToParentPos:ccp(-70.0f,65.0f)];
     }
     return self;
 }
@@ -150,5 +150,14 @@
         }
     }
 }
+@end
 
+@implementation CCNode (IABPauseButton)
+-(void) setPosRelativeToParentPos:(CGPoint)pos
+{
+    CGPoint parentAP = _parent.anchorPoint;
+    CGSize parentCS = _parent.contentSize;
+    self.position = ccp(parentCS.width * parentAP.x + pos.x,
+						parentCS.height * parentAP.y + pos.y);
+}
 @end
